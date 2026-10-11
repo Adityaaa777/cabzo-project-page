@@ -8,7 +8,7 @@ async function updateJavaScript(directory) {
       await updateJavaScript(path)
     } else if (entry.name.endsWith(".js")) {
       const source = await readFile(path, "utf8")
-      const updated = source.replace(/(?<!\.)\/assets\//g, "./assets/")
+      const updated = source.replace(/(?<!\.)\/assets\b/g, "./assets")
       if (updated !== source) await writeFile(path, updated)
     }
   }
