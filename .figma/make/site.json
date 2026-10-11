@@ -1,0 +1,11 @@
+{
+  "title": "Cabzo Project Page",
+  "description": "Generates flawless UI code from design inputs, enabling developers to quickly create polished interfaces and streamline the development process.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
