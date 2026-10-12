@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import type { CSSProperties, KeyboardEvent } from "react"
 import { createPortal } from "react-dom"
+import { LightboxZoomControls, useLightboxZoom } from "./LightboxZoom"
 
 type DetailImageProps = {
   alt: string
@@ -8,6 +9,7 @@ type DetailImageProps = {
   draggable?: boolean | "true" | "false"
   src: string
   style?: CSSProperties
+  viewCrop?: { sourceWidth: number; x: number; y: number; width: number; height: number }
 }
 
 /** An image that opens its uncropped source in an accessible detail viewer. */
@@ -17,8 +19,10 @@ export function DetailImage({
   draggable = false,
   src,
   style,
+  viewCrop,
 }: DetailImageProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const zoom = useLightboxZoom(isOpen)
 
   useEffect(() => {
     if (!isOpen) return
@@ -67,9 +71,18 @@ export function DetailImage({
           onClick={() => setIsOpen(false)}
           role="dialog"
         >
-          <figure className="gallery-lightbox-figure" onClick={(event) => event.stopPropagation()}>
-            <img alt={alt} src={src} />
+          <figure className={`gallery-lightbox-figure${viewCrop ? " gallery-lightbox-figure--cropped" : ""}`} onClick={(event) => event.stopPropagation()}>
+            {viewCrop ? (
+              <div className="gallery-lightbox-crop" style={{ aspectRatio: `${viewCrop.width} / ${viewCrop.height}`, width: `min(92vw, calc(84vh * ${viewCrop.width / viewCrop.height}))`, ...zoom.mediaStyle }} {...zoom.mediaHandlers}>
+                <img
+                  alt={alt}
+                  src={src}
+                  style={{ left: `${(-viewCrop.x / viewCrop.width) * 100}%`, top: `${(-viewCrop.y / viewCrop.height) * 100}%`, width: `${(viewCrop.sourceWidth / viewCrop.width) * 100}%` }}
+                />
+              </div>
+            ) : <img alt={alt} src={src} style={zoom.mediaStyle} {...zoom.mediaHandlers} />}
             <figcaption>{alt}</figcaption>
+            <LightboxZoomControls {...zoom} />
             <button
               aria-label="Close detailed view"
               autoFocus

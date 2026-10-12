@@ -15,6 +15,10 @@
 .cabzo-footer-links a { display:flex; color:inherit; text-decoration:none; align-items:center; gap:.8333cqw; padding:0 2.0833cqw; font-size:1.3889cqw; line-height:1; white-space:nowrap; }
 .cabzo-footer-links a + a { border-left:1px solid #55535e; }
 .cabzo-footer-links img { display:block; max-width:none; }
+.cabzo-footer-links a { transition:color 160ms ease,transform 160ms ease; }
+.cabzo-footer-links a img { transition:filter 160ms ease; }
+.cabzo-footer-links a:hover { color:#c6b3ff; transform:translateY(-3px); }
+.cabzo-footer-links a:hover img { filter:brightness(0) saturate(100%) invert(80%) sepia(13%) saturate(1009%) hue-rotate(205deg) brightness(102%) contrast(101%); }
 .cabzo-footer-copyright { position:absolute; right:0; bottom:0; left:0; display:grid; height:6.7361cqw; place-items:center; border-top:1px solid #27272a; color:#c2c2c2; font-size:1.1111cqw; }
 .cabzo-footer-projects:focus-visible { outline:max(2px,.1389cqw) solid #9a6cff; outline-offset:max(3px,.2083cqw); }
 @media (max-width:700px) {

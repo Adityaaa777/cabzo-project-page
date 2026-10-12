@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import type { CSSProperties } from "react"
 import { createPortal } from "react-dom"
+import { LightboxZoomControls, useLightboxZoom } from "./LightboxZoom"
 
 type ScreenPlacement = {
   height: number
@@ -120,6 +121,7 @@ function placementStyle(screen: ScreenPlacement): CSSProperties {
 /** Displays the ten exported Cabzo app screens with Figma-authored crops. */
 export default function CabzoScreenGallery() {
   const [selectedScreen, setSelectedScreen] = useState<ScreenPlacement | null>(null)
+  const zoom = useLightboxZoom(selectedScreen !== null)
 
   useEffect(() => {
     if (!selectedScreen) return
@@ -171,8 +173,9 @@ export default function CabzoScreenGallery() {
           role="dialog"
         >
           <figure className="gallery-lightbox-figure" onClick={(event) => event.stopPropagation()}>
-            <img alt={selectedScreen.name} src={selectedScreen.src} />
+            <img alt={selectedScreen.name} src={selectedScreen.src} style={zoom.mediaStyle} {...zoom.mediaHandlers} />
             <figcaption>{selectedScreen.name}</figcaption>
+            <LightboxZoomControls {...zoom} />
             <button
               aria-label="Close detailed view"
               className="gallery-lightbox-close"

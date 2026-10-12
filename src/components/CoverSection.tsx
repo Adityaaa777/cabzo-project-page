@@ -4,6 +4,7 @@ import { DetailImage } from "./DetailImage"
 const assetPathPrefix = "/assets"
 const frameWidth = 1439
 const frameHeight = 722
+const phoneViewCrop = { sourceWidth: 4000, x: 1530, y: 450, width: 943, height: 1908 }
 
 type FrameBox = {
   height: number
@@ -174,6 +175,7 @@ export function CoverSection() {
               className="cover-shot-image"
               src={`${assetPathPrefix}/${shot.src}`}
               style={shot.image}
+              viewCrop={phoneViewCrop}
             />
           </div>
         ))}
