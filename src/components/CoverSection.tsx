@@ -111,6 +111,8 @@ const coverShots: CoverShot[] = [
   },
 ]
 
+const coverGallery = coverShots.map(({ alt, src }) => ({ alt, src: `${assetPathPrefix}/${src}` }))
+
 function asFrameBox(box: FrameBox): CSSProperties {
   return {
     height: `${(box.height / frameHeight) * 100}%`,
@@ -173,6 +175,7 @@ export function CoverSection() {
             <DetailImage
               alt={shot.alt}
               className="cover-shot-image"
+              gallery={coverGallery}
               src={`${assetPathPrefix}/${shot.src}`}
               style={shot.image}
               viewCrop={phoneViewCrop}
