@@ -9,12 +9,13 @@
 .cabzo-related-controls button:last-child img { transform:rotate(180deg); }
 .cabzo-related-track { display:grid; grid-auto-flow:column; grid-auto-columns:27.9167cqw; gap:2.2222cqw; margin-top:2.4306cqw; overflow-x:auto; overscroll-behavior-inline:contain; scroll-behavior:smooth; scroll-snap-type:inline mandatory; scrollbar-width:none; }
 .cabzo-related-track::-webkit-scrollbar { display:none; }
-.cabzo-related-card { display:block; height:30.8333cqw; overflow:hidden; border:1px solid #2d2d39; border-radius:1.0417cqw; background:#1a1a24; color:inherit; text-decoration:none; cursor:pointer; scroll-snap-align:start; }
+.cabzo-related-card { position:relative; display:block; height:30.8333cqw; overflow:hidden; border:1px solid #2d2d39; border-radius:1.0417cqw; background:#1a1a24; color:inherit; scroll-snap-align:start; }
+.cabzo-related-card-main { display:block; height:100%; color:inherit; text-decoration:none; cursor:pointer; }
 .cabzo-related-cover { display:block; width:100%; height:17.3611cqw; object-fit:cover; }
 .cabzo-related-card-content { padding:1.3889cqw 1.3194cqw 1.5278cqw; }
-.cabzo-related-meta { display:flex; align-items:center; justify-content:space-between; }
+.cabzo-related-meta { display:flex; min-height:2.7778cqw; align-items:center; justify-content:space-between; }
 .cabzo-related-meta>span:first-child { display:inline-flex; min-height:2.1528cqw; align-items:center; padding:0 1.0417cqw; border-radius:999px; background:#15151d; color:#d5c8ff; font-size:1.0417cqw; }
-.cabzo-related-card-arrow { display:grid; width:2.7778cqw; height:2.7778cqw; place-items:center; border:1px solid #5b28cd8c; border-radius:50%; background:#1c1830; box-shadow:0 0 16px #5926cd6b; }
+.cabzo-related-card-arrow { position:absolute; top:18.75cqw; right:1.3194cqw; display:grid; width:2.7778cqw; height:2.7778cqw; place-items:center; border:1px solid #5b28cd8c; border-radius:50%; background:#1c1830; box-shadow:0 0 16px #5926cd6b; }
 .cabzo-related-card-arrow img { width:1.8056cqw; height:1.8056cqw; transform:rotate(45deg); }
 .cabzo-related-card h3 { margin:.9028cqw 0 .4861cqw; font-size:1.875cqw; font-weight:500; line-height:1.2; }
 .cabzo-related-card p { margin:0; color:#e1dfe7; font-size:1.1111cqw; font-weight:400; line-height:1.55; }
@@ -31,8 +32,9 @@
   .cabzo-related-card { height:394px; border-radius:12px; }
   .cabzo-related-cover { height:214px; }
   .cabzo-related-card-content { padding:16px; }
+  .cabzo-related-meta { min-height:36px; }
   .cabzo-related-meta>span:first-child { min-height:28px; padding:0 12px; font-size:12px; }
-  .cabzo-related-card-arrow { width:36px; height:36px; }
+  .cabzo-related-card-arrow { top:230px; right:16px; width:36px; height:36px; }
   .cabzo-related-card-arrow img { width:23px; height:23px; }
   .cabzo-related-card h3 { margin:10px 0 4px; font-size:24px; }
   .cabzo-related-card p { font-size:14px; }

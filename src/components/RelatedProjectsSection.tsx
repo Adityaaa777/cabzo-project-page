@@ -55,19 +55,21 @@ export function RelatedProjectsSection() {
         </header>
         <div className="cabzo-related-track" ref={track}>
           {projects.map((project) => (
-            <a className="cabzo-related-card" href={project.href} key={project.title} aria-label={`View ${project.title} project`}>
-              <img className="cabzo-related-cover" src={project.image} alt={`${project.title} project cover`} />
-              <div className="cabzo-related-card-content">
-                <div className="cabzo-related-meta">
-                  <span>{project.category}</span>
-                  <span className="cabzo-related-card-arrow" aria-hidden="true">
-                    <img src="/assets/section-08-related/project-arrow-alt.svg" alt="" />
-                  </span>
+            <div className="cabzo-related-card" key={project.title}>
+              <a className="cabzo-related-card-main" href={project.href} aria-label={`View ${project.title} project`}>
+                <img className="cabzo-related-cover" src={project.image} alt={`${project.title} project cover`} />
+                <div className="cabzo-related-card-content">
+                  <div className="cabzo-related-meta">
+                    <span>{project.category}</span>
+                  </div>
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
                 </div>
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-              </div>
-            </a>
+              </a>
+              <a className="cabzo-related-card-arrow" href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title} project in a new tab`}>
+                <img src="/assets/section-08-related/project-arrow-alt.svg" alt="" />
+              </a>
+            </div>
           ))}
         </div>
       </div>
