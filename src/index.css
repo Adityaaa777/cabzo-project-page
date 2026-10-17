@@ -435,7 +435,7 @@ body {
 .gallery-lightbox-nav--previous { left: -70px; }
 .gallery-lightbox-nav--next { right: -70px; }
 .gallery-lightbox-nav svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; }
-.gallery-lightbox-nav:hover { background: #6c36fe; }
+.gallery-lightbox-nav:hover { background: var(--cover-yellow); color: #171717; }
 .gallery-lightbox-nav:focus-visible { outline: 2px solid var(--cover-yellow); outline-offset: 3px; }
 
 @media (max-width: 600px) {

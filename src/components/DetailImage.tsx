@@ -8,6 +8,7 @@ type DetailImageProps = {
   className: string
   draggable?: boolean | "true" | "false"
   gallery?: { alt: string; src: string }[]
+  galleryIndex?: number
   src: string
   style?: CSSProperties
   viewCrop?: { sourceWidth: number; x: number; y: number; width: number; height: number }
@@ -19,6 +20,7 @@ export function DetailImage({
   className,
   draggable = false,
   gallery,
+  galleryIndex,
   src,
   style,
   viewCrop,
@@ -29,7 +31,7 @@ export function DetailImage({
   const activeImage = gallery?.[activeIndex] ?? { alt, src }
 
   const open = () => {
-    setActiveIndex(Math.max(0, gallery?.findIndex((image) => image.src === src) ?? 0))
+    setActiveIndex(galleryIndex ?? Math.max(0, gallery?.findIndex((image) => image.src === src) ?? 0))
     setIsOpen(true)
   }
 
@@ -104,10 +106,10 @@ export function DetailImage({
             <figcaption aria-live={gallery ? "polite" : undefined}>{activeImage.alt}</figcaption>
             {gallery && (
               <>
-                <button aria-label="Previous cover screen" className="gallery-lightbox-nav gallery-lightbox-nav--previous" onClick={() => move(-1)} type="button">
+                <button aria-label="Previous screen" className="gallery-lightbox-nav gallery-lightbox-nav--previous" onClick={() => move(-1)} type="button">
                   <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></svg>
                 </button>
-                <button aria-label="Next cover screen" className="gallery-lightbox-nav gallery-lightbox-nav--next" onClick={() => move(1)} type="button">
+                <button aria-label="Next screen" className="gallery-lightbox-nav gallery-lightbox-nav--next" onClick={() => move(1)} type="button">
                   <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></svg>
                 </button>
               </>

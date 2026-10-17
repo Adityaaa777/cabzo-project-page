@@ -120,15 +120,21 @@ function placementStyle(screen: ScreenPlacement): CSSProperties {
 
 /** Displays the ten exported Cabzo app screens with Figma-authored crops. */
 export default function CabzoScreenGallery() {
-  const [selectedScreen, setSelectedScreen] = useState<ScreenPlacement | null>(null)
-  const zoom = useLightboxZoom(selectedScreen !== null)
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
+  const selectedScreen = selectedIndex === null ? null : screenPlacements[selectedIndex]
+  const zoom = useLightboxZoom(selectedIndex !== null)
+
+  const move = (direction: -1 | 1) => {
+    zoom.reset()
+    setSelectedIndex((index) => index === null ? null : (index + direction + screenPlacements.length) % screenPlacements.length)
+  }
 
   useEffect(() => {
     if (!selectedScreen) return
 
     const previousOverflow = document.body.style.overflow
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setSelectedScreen(null)
+      if (event.key === "Escape") setSelectedIndex(null)
     }
 
     document.body.style.overflow = "hidden"
@@ -148,13 +154,13 @@ export default function CabzoScreenGallery() {
         data-node-id="12:161"
       >
         <div className="screen-gallery" data-node-id="1:651">
-          {screenPlacements.map((screen) => (
+          {screenPlacements.map((screen, index) => (
             <button
               aria-label={`View ${screen.name} in detail`}
               className="screen-placement"
               data-node-id={screen.nodeId}
               key={screen.nodeId}
-              onClick={() => setSelectedScreen(screen)}
+              onClick={() => setSelectedIndex(index)}
               style={placementStyle(screen)}
               type="button"
             >
@@ -169,17 +175,27 @@ export default function CabzoScreenGallery() {
           aria-label={`${selectedScreen.name} detailed view`}
           aria-modal="true"
           className="gallery-lightbox"
-          onClick={() => setSelectedScreen(null)}
+          onClick={() => setSelectedIndex(null)}
+          onKeyDown={(event) => {
+            if (event.key === "ArrowLeft") { event.preventDefault(); move(-1) }
+            if (event.key === "ArrowRight") { event.preventDefault(); move(1) }
+          }}
           role="dialog"
         >
           <figure className="gallery-lightbox-figure" onClick={(event) => event.stopPropagation()}>
             <img alt={selectedScreen.name} src={selectedScreen.src} style={zoom.mediaStyle} {...zoom.mediaHandlers} />
-            <figcaption>{selectedScreen.name}</figcaption>
+            <figcaption aria-live="polite">{selectedScreen.name}</figcaption>
+            <button aria-label="Previous screen" className="gallery-lightbox-nav gallery-lightbox-nav--previous" onClick={() => move(-1)} type="button">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></svg>
+            </button>
+            <button aria-label="Next screen" className="gallery-lightbox-nav gallery-lightbox-nav--next" onClick={() => move(1)} type="button">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></svg>
+            </button>
             <LightboxZoomControls {...zoom} />
             <button
               aria-label="Close detailed view"
               className="gallery-lightbox-close"
-              onClick={() => setSelectedScreen(null)}
+              onClick={() => setSelectedIndex(null)}
               type="button"
             >
               <span aria-hidden="true">×</span>

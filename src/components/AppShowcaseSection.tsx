@@ -35,6 +35,9 @@ const driverGalleryScreens: DriverGalleryScreen[] = [
   { src: "/assets/driver-signup.png", alt: "Join Cabzo signup", x: 1033, y: 376, height: 539 },
 ]
 
+const showcaseGallery = showcaseScreens.map(({ alt, src }) => ({ alt, src }))
+const driverGallery = driverGalleryScreens.map(({ alt, src }) => ({ alt, src }))
+
 /** Figma nodes 18:163 and 18:165, combined as consecutive showcase frames. */
 export function AppShowcaseSection() {
   return (
@@ -51,11 +54,13 @@ export function AppShowcaseSection() {
             <p>Onboarding &amp; Home Dashboard</p>
           </header>
 
-          {showcaseScreens.map((screen) => (
+          {showcaseScreens.map((screen, index) => (
             <DetailImage
               alt={screen.alt}
               className={`showcase-screen ${screen.className}`}
               draggable="false"
+              gallery={showcaseGallery}
+              galleryIndex={index}
               key={screen.src}
               src={screen.src}
             />
@@ -70,6 +75,8 @@ export function AppShowcaseSection() {
               alt={screen.alt}
               className="driver-gallery-screen"
               draggable="false"
+              gallery={driverGallery}
+              galleryIndex={index}
               key={`${screen.src}-${index}`}
               src={screen.src}
               style={{
